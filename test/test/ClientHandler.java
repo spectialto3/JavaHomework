@@ -30,7 +30,7 @@ public class ClientHandler implements Runnable {
             ServerFileHelper.saveRecord("server_all_records.txt", List.of(t));
             try {
                 DatabaseHelper.insertTicket(t);
-            } catch (SQLException se) {
+            } catch (Throwable se) {
                 se.printStackTrace();
             }
             

@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.Properties;
 
 public class DatabaseHelper {
@@ -63,36 +62,5 @@ public class DatabaseHelper {
             ps.setString(4, t.getEndCity());
             ps.executeUpdate();
         }
-    }
-
-    public static String listTicketsJson() throws SQLException {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        boolean first = true;
-        try (Connection conn = getConnection();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery("SELECT id,name,id_card,start_city,end_city,created_at FROM tickets ORDER BY id")) {
-            while (rs.next()) {
-                if (!first) sb.append(",");
-                first = false;
-                sb.append("{");
-                sb.append("\"id\":").append(rs.getLong(1)).append(",");
-                sb.append("\"name\":\"").append(escape(rs.getString(2))).append("\",");
-                sb.append("\"idCard\":\"").append(escape(rs.getString(3))).append("\",");
-                sb.append("\"startCity\":\"").append(escape(rs.getString(4))).append("\",");
-                sb.append("\"endCity\":\"").append(escape(rs.getString(5))).append("\",");
-                Timestamp ts = rs.getTimestamp(6);
-                String iso = ts == null ? "" : ts.toInstant().toString();
-                sb.append("\"createdAt\":\"").append(escape(iso)).append("\"");
-                sb.append("}");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
-    }
-
-    private static String escape(String s) {
-        if (s == null) return "";
-        return s.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 }

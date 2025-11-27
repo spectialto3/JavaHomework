@@ -19,6 +19,7 @@ public class TestCommunication {
     }
 
     public static void main(String[] args) {
+        System.out.println("若未运行服务器，请先运行 RunServers 再继续...");
         Thread a = new Thread(() -> send(new Ticket("张三", "11010119900101001X", "北京", "上海")), "T-A");
         Thread b = new Thread(() -> send(new Ticket("李四", "320101199202021234", "南京", "杭州")), "T-B");
         Thread c = new Thread(() -> send(new Ticket("王五", "440101198807073333", "广州", "深圳")), "T-C");
