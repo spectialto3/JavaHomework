@@ -26,7 +26,7 @@ public class DatabaseHelper {
             if (!baseUrl.endsWith("/")) baseUrl = baseUrl + "/";
             url = baseUrl + db + "?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8";
             user = props.getProperty("user", "root");
-            password = props.getProperty("password", "1234");
+            password = props.getProperty("password", "060303");
 
             try (Connection conn = DriverManager.getConnection(baseUrl + "?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8", user, password);
                  Statement st = conn.createStatement()) {
